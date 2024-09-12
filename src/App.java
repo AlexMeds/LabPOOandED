@@ -1,16 +1,22 @@
 public class App {
     public static void main(String[] args) throws Exception {
         Lista lista = new Lista();
-        for(int i = 0; i <= 20; i++){
-            lista.adicionarBloco(i);
-        }
 
+        lista.contarBloco();
 
-        lista.adicionarBloco(100, 2);
+        lista.addBlocoInexistente(50, 23);
 
-        lista.removerBloco(2);
+        lista.adicionarBloco(500,20);
 
-        lista.localizarBloco(2);
+        lista.adicionarBloco(100,1);
+
+        lista.mostrarLista();
+
+        lista.contarBloco();
+
+        lista.removerBloco(1);
+
+        lista.contarBloco();
 
     }
 }
