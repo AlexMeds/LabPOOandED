@@ -2,22 +2,23 @@ public class App {
     public static void main(String[] args) throws Exception {
         Lista lista = new Lista();
 
-        lista.contarBloco();
-
-        lista.addBlocoInexistente(50, 23);
-
-        lista.adicionarBloco(500,20);
-
-        lista.adicionarBloco(100,1);
+        for(int i = 0; i <= 10; i++){
+            lista.adicionarBlocoInicio(i);
+        }
 
         lista.mostrarLista();
 
-        lista.contarBloco();
+        System.out.println("\n");
 
-        lista.removerBloco(1);
+        System.out.println("Simulação de FILA:");
+        lista.removerBlocoInicio();
+        lista.mostrarLista();
 
-        lista.contarBloco();
+        System.out.println("\n");
 
+        System.out.println("Simulação de PILHA:");
+        lista.removerBlocoFim();
+        lista.mostrarLista();
     }
 }
 

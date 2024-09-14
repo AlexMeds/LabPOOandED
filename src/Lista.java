@@ -64,6 +64,21 @@ public class Lista {
         return blocoAux;
     }
 
+    public Bloco localizarBlocoRecursivo(int posicao){
+        return localizarBlocoRecursivo(posicao, 0, inicio);
+    }
+
+    private Bloco localizarBlocoRecursivo (int posicao, int posicaoAtual, Bloco blocoAux){
+        if(blocoAux != null){
+            if(posicao == posicaoAtual){
+                return blocoAux;
+            }else{
+                return localizarBlocoRecursivo(posicao, posicaoAtual ++, blocoAux.prox);
+            }
+        }
+        return blocoAux;
+    }
+
     public Bloco removerBloco (int posicao){
         if(inicio == null || posicao < 0){
             return null;
@@ -80,35 +95,68 @@ public class Lista {
         return blocoAlvo;
     }
 
-    public void mostrarLista(){
+    public Bloco removerBlocoInicio(){
+        if(inicio == null){
+            return null;
+        }else{
+            Bloco blocoRemovido = inicio;
+            inicio = inicio.prox;
+            return blocoRemovido;
+        }
+    }
+
+    public Bloco removerBlocoFim(){
+        int tamanho = contarBloco();
+        Bloco blocoRemovido = null;
+        if(tamanho == 0){
+            return blocoRemovido;
+        }else if(tamanho == 1){
+            blocoRemovido = inicio;
+            inicio = null;
+            return blocoRemovido;
+        }else{
+            Bloco blocoAnterior = localizarBloco(contarBloco() - 1);
+            blocoRemovido = blocoAnterior.prox;
+            blocoAnterior.prox = null;
+            return blocoRemovido;
+        }
+    }
+
+    public void mostrarLista() {
         Bloco blocoAux = inicio;
-        while(blocoAux != null){
+        while (blocoAux != null) {
             System.out.println(blocoAux.valor);
             blocoAux = blocoAux.prox;
+        }
+        int tamanho = contarBloco();
+        if (tamanho == 0) {
+            System.out.format("Lista vazia!\n");
+        } else {
+            System.out.format("A lista possui %d Blocos\n", tamanho);
         }
     }
 
     public void mostrarBloco (int posicao){
         Bloco blocoAux = inicio;
         int contador = 0;
-        while(blocoAux != null && contador < posicao){
+        while(blocoAux != null && contador < posicao - 1){
             blocoAux = blocoAux.prox;
             contador++;
         }
         System.out.println(blocoAux.valor);
     }
 
-    public void contarBloco(){
+    public int contarBloco(){
+        int contador = 0;
         if(inicio == null){
-            System.out.println("Lista vazia");
+            return 0;
         }else{
             Bloco blocoAux = inicio;
-            int contador = 0;
-            while(blocoAux != null){
+            while(blocoAux != null) {
                 blocoAux = blocoAux.prox;
-                contador ++;
+                contador++;
             }
-            System.out.format("A lista possui %d blocos\n", contador);
         }
+        return contador;
     }
 }
