@@ -1,6 +1,37 @@
-public class Lista {
-    
-    Bloco inicio;
+package ListaEstruturaDeDados;
+
+public class ListaSimplesmenteEncaadeada {
+
+    Header cabecalho = new Header();
+    Bloco inicio = cabecalho.inicio;
+
+    public Bloco adicionarInicio (int valor){
+        Bloco novo = new Bloco();
+        novo.valor = valor;
+        this.cabecalho.tamanho++;
+        if(this.inicio== null){
+            this.inicio = novo;
+            this.cabecalho.fim = novo;
+        }else{
+            novo.prox = this.inicio;
+            this.inicio = novo;
+        }
+        return novo;
+    }
+
+    public Bloco adicionarFim (int valor){
+        Bloco novo = new Bloco();
+        novo.valor = valor;
+        this.cabecalho.tamanho ++;
+        if(this.inicio == null){
+            this.inicio = novo;
+            this.cabecalho.fim = novo;
+        }else{
+            this.cabecalho.fim.prox = novo;
+            this.cabecalho.fim = novo;
+        }
+        return novo;
+    }
 
     public Bloco adicionarBlocoInicio (int valor){
         Bloco novo = new Bloco();
@@ -25,7 +56,7 @@ public class Lista {
         return novo;
     }
 
-    public Bloco addBlocoInexistente (int valor, int posicao){ // Bloco em uma posicao que nao existe
+    public Bloco addBlocoInexistente (int valor, int posicao){ // ListaEstruturaDeDados.Bloco em uma posicao que nao existe
         Bloco blocoNovo = localizarBloco(posicao);
         if(blocoNovo == null){
             adicionarBlocoFinal(1);
@@ -73,7 +104,7 @@ public class Lista {
             if(posicao == posicaoAtual){
                 return blocoAux;
             }else{
-                return localizarBlocoRecursivo(posicao, posicaoAtual ++, blocoAux.prox);
+                return localizarBlocoRecursivo(posicao, posicaoAtual + 1, blocoAux.prox);
             }
         }
         return blocoAux;
